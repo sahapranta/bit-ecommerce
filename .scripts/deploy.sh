@@ -11,7 +11,7 @@ echo "Deployment started ..."
 git pull origin production
 
 # Install composer dependencies
-composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+# composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Clear the old cache
 php artisan clear-compiled
@@ -20,10 +20,10 @@ php artisan clear-compiled
 php artisan optimize
 
 # Compile npm assets
-npm run build
+# npm run build
 
 # Run database migrations
-php artisan migrate --force
+# php artisan migrate --force
 
 # Exit maintenance mode
 php artisan up
