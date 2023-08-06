@@ -19,8 +19,8 @@
 <x-hero />
 
 <div class="content">
-    <!-- Toggle Side Content -->
-    <!-- Class Toggle, functionality initialized in Helpers.oneToggleClass() -->
+
+    @settings('search_filter_enabled', false)
     <div class="d-xl-none push">
         <div class="row g-sm">
             <div class="col-12">
@@ -28,16 +28,13 @@
                     <i class="fa fa-fw fa-filter text-muted me-1"></i> Filters
                 </button>
             </div>
-            <!-- <div class="col-6">
-                    <button type="button" class="btn btn-alt-secondary w-100" data-toggle="class-toggle" data-target=".js-ecom-div-cart" data-class="d-none">
-                        <i class="fa fa-fw fa-shopping-cart text-muted me-1"></i> Cart (3)
-                    </button>
-                </div> -->
+
         </div>
     </div>
-    <!-- END Toggle Side Content -->
+    @endsettings
 
     <div class="row push">
+        @settings('search_filter_enabled', false)
         <div class="col-xl-4 pe-md-4 order-xl-0">
             <form action="{{ route('search') }}" method="get" id="filterForm">
                 <div class="pb-3 btn-group w-100">
@@ -50,7 +47,6 @@
                         Filter
                     </button>
                 </div>
-                <!-- Misc Filters -->
                 <div class="block block-rounded js-ecom-div-filters d-none d-xl-block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
@@ -78,7 +74,6 @@
                     </div>
                 </div>
 
-                <!-- Categories Filters -->
                 <div class="block block-rounded js-ecom-div-filters d-none d-xl-block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
@@ -113,7 +108,8 @@
                 </div>
             </form>
         </div>
-        <div class="col-xl-8 order-xl-1">
+        @endsettings
+        <div class="col-xl-10 order-xl-1">
             @if (false)
             <div class="bg-body-dark fw-semibold text-muted rounded p-3 push text-center">
                 {{ $products->count() }} products were found
@@ -185,14 +181,21 @@
 
 @section('js')
 <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
+@settings('search_filter_enabled', false)
 <script src="{{ asset('js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $('.js-rangeslider').ionRangeSlider({
             input_values_separator: ',',
             skin: 'round'
         });
+    });
+</script>
+@endsettings
 
+<script>
+    $(document).ready(function() {
         $('#sort').change(function() {
             let sort = $(this).val();
             $('#filterForm').append('<input type="hidden" name="sort" value="' + sort + '">');
