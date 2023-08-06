@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -50,6 +51,8 @@ class CategoryController extends Controller
             $category->addMedia($request->file('image'))->toMediaCollection('category');
         }
 
+        CategoryService::cleanCache();
+
         return $this->respond('Category created successfully.');
     }
 
@@ -85,6 +88,7 @@ class CategoryController extends Controller
             $category->clearMediaCollection('category');
             $category->addMedia($request->file('image'))->toMediaCollection('category');
         }
+        CategoryService::cleanCache();
 
         return $this->respond('Category updated successfully.');
     }
@@ -94,6 +98,7 @@ class CategoryController extends Controller
         abort_if($category->products()->exists(), 403, 'You can\'t delete this category because it has products.');
 
         $category->delete();
+        CategoryService::cleanCache();
 
         return $this->respond('Category deleted successfully.');
     }

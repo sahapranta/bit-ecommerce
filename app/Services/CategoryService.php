@@ -91,4 +91,14 @@ class CategoryService
 
         return $cleanedCategories;
     }
+
+    public static function cleanCache()
+    {
+        Cache::forget('categories');
+        Cache::forget('categories_with_product_counts');
+        Cache::forget('categories_with_sales_counts');
+        Cache::forget('categories_with_stock_counts');
+        Cache::forget('home_categories');
+        Cache::forget('categories_tree_list');
+    }
 }
