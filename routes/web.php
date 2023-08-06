@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SubscriptionController;
 
@@ -63,7 +64,7 @@ Route::middleware('signed')
         Route::get('/unsubscribe', 'unsubscribe')->name('unsubscribe');
     });
 
-Route::any('/payments/callback/{payment}', 'PaymentController@callback')->name('payments.callback');
+Route::any('/payments/callback/{payment}', [PaymentController::class, 'callback'])->name('payments.callback');
 
 
 Route::controller(PagesController::class)->name('pages.')->group(function () {
