@@ -75,7 +75,7 @@ class ProductController extends Controller
             'name', 'slug', 'title', 'short_description',
             'description', 'price', 'stock', 'status',
             'is_active', 'tags', 'category_id', 'discount',
-            'upc', 'delivery_fee', 'options'
+            'upc', 'options'
         ]) + ['user_id' => auth()->id()]);
 
         if ($request->has('images')) {
@@ -200,7 +200,7 @@ class ProductController extends Controller
 
             $product->update($request->only([
                 'name', 'slug', 'title', 'short_description',
-                'description', 'price', 'stock', 'delivery_fee',
+                'description', 'price', 'stock',
                 'tags', 'category_id', 'discount', 'upc', 'status', 'options'
             ]));
 

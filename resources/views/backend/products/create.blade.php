@@ -57,7 +57,7 @@
                         <div class="row">
 
                             <div class="col-md-6">
-                                <x-input name="price" label="Price in BTC ({{AppSettings::get('currency_sign', '₿')}})" placeholder="Price..." type="number" step="any" min="0" required />
+                                <x-input name="price" label="Price in {{ AppSettings::get('currency_code', 'GBP') }} ({{AppSettings::get('currency_sign', '₿')}})" placeholder="Price..." type="number" step="any" min="0" required />
                             </div>
 
                             <div class="col-md-6">
@@ -114,9 +114,10 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            {{--
                             <div class="col-md-6">
                                 <x-input name="delivery_fee" placeholder="eg: 20" type="number" step="any" min="0" info="Delivery Fee for each product" />
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="mb-4">

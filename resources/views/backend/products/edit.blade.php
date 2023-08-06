@@ -102,13 +102,13 @@
             @csrf
             <x-input name="name" required :value="$product->name" />
             <x-input name="slug" :value="$product->slug" info="Leave it empty to Autogenerate & Must be Unique">
-              <x-slot name="feedback">eg: <a href="javascript:void(0)" tabindex="0">{{ route('product.view', $product->slug) }}</a></x-slot>
+              <x-slot name="feedback">eg: <a href="{{ route('product.view', $product->slug) }}" target="_blank" tabindex="0">{{ route('product.view', $product->slug) }}</a></x-slot>
             </x-input>
 
             <div class="row">
 
               <div class="col-md-6">
-                <x-input name="price" :value="$product->price" label="Price in BTC ({{AppSettings::get('currency_sign', '₿')}})" placeholder="Price..." type="number" step="any" min="0" required />
+                <x-input name="price" :value="$product->price" label="Price in {{ AppSettings::get('currency_code', 'GBP') }} ({{ AppSettings::get('currency_sign', '₿')}})" placeholder="Price..." type="number" step="any" min="0" required />
               </div>
 
               <div class="col-md-6">
@@ -162,9 +162,11 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
-              <div class="col-md-6">
-                <x-input name="Delivery Fee" :value="$product->delivery_fee" placeholder="eg: 20" type="number" step="any" min="0" info="Delivery Fee for each product" />
-              </div>
+              {{--
+                <div class="col-md-6">
+                  <x-input name="Delivery Fee" :value="$product->delivery_fee" placeholder="eg: 20" type="number" step="any" min="0" info="Delivery Fee for each product" />
+                </div>
+                --}}
             </div>
 
             <div class="mb-4">
@@ -222,7 +224,7 @@
 
           </div>
         </div>
-        <x-key-value-input name="options"  :data="@json_encode($product->options)"/>
+        <x-key-value-input name="options" :data="@json_encode($product->options)" />
   </form>
 
   <div class="block block-rounded">
