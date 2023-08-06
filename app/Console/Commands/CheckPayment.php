@@ -31,6 +31,11 @@ class CheckPayment extends Command
      */
     public function handle(BlockService $block): void
     {
+        if(config('blockio.api_key') == null || config('blockio.pin') == null) {
+            $this->error('PLEASE SET BLOCKIO API KEY .ENV FILE');
+            return;
+        }
+
         $this->checkPayment($block);
         $this->checkConfirmation($block);
     }
