@@ -3,7 +3,11 @@
         <div class="mx-auto" style="width:90%;">
             <div class="row items-push fs-sm pt-4">
                 <div class="col-md-4">
-                    <h3>{{ config('app.name') }}</h3>
+                    @settings('navbar_logo')
+                    <img src="{{ asset(AppSettings::get('logo', 'media/logo.webp')) }}" alt="{{ AppSettings::get('site_name', 'Laravel') }} Logo" class="" width="100" height="40">
+                    @else
+                    <h3>{{ AppSettings::get('site_name', 'Laravel') }}</h3>
+                    @endsettings
                     <div class="fs-sm mb-4">
                         {!! AppSettings::get('address') !!}
                     </div>
@@ -24,7 +28,7 @@
                     @endsettings
                 </div>
                 <div class="col-sm-6 col-md-4">
-                    <h4 class="h4 text-muted">Information</h4>
+                    <h4 class="h4 text-muted">{{ __('Information') }}</h4>
                     <ul class="list list-simple-mini">
                         @foreach (AppSettings::get('information_links', []) as $name => $link)
                         <li>
@@ -36,9 +40,9 @@
                     </ul>
                 </div>
                 <div class="col-sm-6 col-md-4">
-                    <h4 class="text-muted h4">Quick Links</h4>
+                    <h4 class="text-muted h4">{{ __('Quick Links') }}</h4>
                     <ul class="list list-simple-mini">
-                    @foreach (AppSettings::get('quick_links', []) as $name => $link)
+                        @foreach (AppSettings::get('quick_links', []) as $name => $link)
                         <li>
                             <a title="{{ $name }}" class="fw-semibold @if (request()->is($link) || request()->is($link.'/*')) active @endif" href="{{ empty($link) ? '#': url($link) }}">
                                 <i class="fa fa-fw fa-link text-primary-lighter me-1"></i> {{ $name }}
