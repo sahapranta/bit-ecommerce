@@ -1,7 +1,11 @@
 @extends('layouts.simple')
 
 @section('css')
+
+@settings('search_filter_enabled', false)
 <link rel="stylesheet" href="{{ asset('js/plugins/ion-rangeslider/css/ion.rangeSlider.min.css') }}">
+@endsettings
+
 <style>
     ul.pagination {
         justify-content: space-between;
@@ -109,7 +113,7 @@
             </form>
         </div>
         @endsettings
-        <div class="col-xl-10 order-xl-1">
+        <div class="col-xl-10 order-xl-1 mx-auto">
             @if (false)
             <div class="bg-body-dark fw-semibold text-muted rounded p-3 push text-center">
                 {{ $products->count() }} products were found
