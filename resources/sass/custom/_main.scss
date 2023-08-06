@@ -1,0 +1,60 @@
+//
+// Custom Main
+//
+// Add your own styles or override existing ones
+//
+// This file is included last, so you have access
+// to all Bootstrap and OneUI functions/mixins/styles etc
+// --------------------------------------------------
+
+// If you have many custom styles, you can create and import additional files
+// For example you can create _component1.scss and include it as follows:
+// @import 'component1';
+
+.text-alt-danger {
+    color: #80132b !important;
+}
+
+.btn-xs,
+.btn-group-xs > .btn {
+    --bs-btn-padding-y: 0.25rem;
+    --bs-btn-padding-x: 0.35rem;
+    --bs-btn-font-size: 0.75rem;
+    --bs-btn-border-radius: 0;
+}
+
+.border-radius-right {
+    border-top-right-radius: 20% !important;
+    border-bottom-right-radius: 20% !important;
+}
+
+.border-radius-left {
+    border-top-left-radius: 20% !important;
+    border-bottom-left-radius: 20% !important;
+}
+
+.home-search {
+    background-color: transparent !important;
+    color: #fff !important;
+    outline: none !important;
+}
+
+.home-search:focus {
+    outline: none !important;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.home-search::placeholder {
+    color: #fff !important;
+}
+
+.cursor-pointer,
+.cursor-pointer:hover {
+    cursor: pointer;
+}
+
+.fa-1\.5x{
+    font-size: 1.5em !important;
+}

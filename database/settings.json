@@ -1,0 +1,122 @@
+[
+    {
+        "key": "tax_enabled",
+        "value": 1,
+        "type": "checkbox"
+    },
+    {
+        "key": "tax_rate",
+        "value": 10,
+        "type": "number"
+    },
+    {
+        "key": "product_options_enabled",
+        "value": "0",
+        "type": "checkbox"
+    },
+    {
+        "key": "product_options_enabled",
+        "value": "0",
+        "type": "checkbox"
+    },
+    {
+        "key": "social_login_enabled",
+        "value": "0",
+        "type": "checkbox"
+    },
+    {
+        "key": "currency_symbol",
+        "value": "\u20bf",
+        "type": "text"
+    },
+    {
+        "key": "currency_code",
+        "value": "BTC",
+        "type": "text"
+    },
+    {
+        "key": "currency_name",
+        "value": "Bitcoin",
+        "type": "text"
+    },
+    {
+        "key": "currency_rate",
+        "value": 1,
+        "type": "number"
+    },
+    {
+        "key": "tracking_id_prefix",
+        "value": "ORD",
+        "type": "text"
+    },
+    {
+        "key": "comment_system_enabled",
+        "value": 0,
+        "type": "checkbox"
+    },
+    {
+        "key": "review_system_enabled",
+        "value": 1,
+        "type": "checkbox"
+    },
+    {
+        "key": "default_paginate_limit",
+        "value": 15,
+        "type": "number"
+    },
+    {
+        "key": "product_per_page",
+        "value": 12,
+        "type": "number"
+    },
+    {
+        "key": "address",
+        "value": "1080 Sunshine Valley, Suite 2563",
+        "type": "textarea"
+    },
+    {
+        "key": "copyright_note",
+        "value": "Copyright \u00a9 {sitename} {year}",
+        "type": "text"
+    },
+    {
+        "key": "site_name",
+        "value": "Laravel",
+        "type": "text"
+    },
+    {
+        "key": "site_title",
+        "value": "Welcome to our Digital Store!",
+        "type": "text"
+    },
+    {
+        "key": "social_links",
+        "value": "[{\"facebook\":\"facebook.com\"},{\"twitter\":\"twitter.com\"}]",
+        "type": "key-value"
+    },
+    {
+        "key": "navbar_links",
+        "value": "{\"About\":\"page\/about-us\", \"contact\":\"page\/contact-us\"}",
+        "type": "key-value"
+    },
+    {
+        "key": "information_links",
+        "value": "{\"About Us\":\"page\/about-us\"}",
+        "type": "key-value"
+    },
+    {
+        "key": "quick_links",
+        "value": "{\"Terms & Condition\":\"page\/terms\"}",
+        "type": "key-value"
+    },
+    {
+        "key": "delivery_methods",
+        "value": "[\"dhl\"=>\"10\"]",
+        "type": "key-value"
+    },
+    {
+        "key": "review_system_enabled",
+        "value": "0",
+        "type": "checkbox"
+    }
+]
