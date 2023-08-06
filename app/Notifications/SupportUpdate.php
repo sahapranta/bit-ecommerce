@@ -39,7 +39,7 @@ class SupportUpdate extends Notification implements ShouldQueue
             ->subject('Support Update')
             ->line('Your have new update about your issue.')
             ->line("Your issue related to {$this->support->type} got updated. Please check your dashboard.")
-            ->action('Dashboard', route('user.support.index'));
+            ->action('Dashboard', route('user.support'));
     }
 
     /**
