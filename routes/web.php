@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/support', 'supportSave')->name('support.save');
         Route::get('/notifications', 'notifications')->name('notifications');
         Route::get('/track-order', 'trackOrder')->name('order.track');
-        Route::post('/order-cancel/{order:order_id}')->name('order.cancel');
+        Route::post('/order-cancel/{order:order_id}', 'cancelOrder')->name('order.cancel');
         Route::get('/dashboard', 'dashboard')->name('dashboard');
         Route::get('/notifications/mark-all-read', 'markAllNotificationsAsRead')->name('notifications.mark-all-read');
         Route::get('/notifications/delete-all-read', 'deleteReadNotifications')->name('notifications.delete-all-read');

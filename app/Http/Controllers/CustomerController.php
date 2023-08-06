@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatusEnum;
 use App\Events\NotifyAdmin;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -192,18 +193,39 @@ class CustomerController extends Controller
 
         $user = Auth::user();
 
-        $user->supports()->create([
+        $support = $user->supports()->create([
             'type' => $request->issue,
             'description' => $request->description,
         ]);
 
         event(new NotifyAdmin([
             'message' => 'New support ticket created by ' . $user->name,
+            'action' => route('admin.support.edit', $support->id),
         ]));
 
         return redirect()->back()->with([
             'message' => 'Support ticket created successfully.',
             'alert' => 'success',
         ]);
+    }
+
+    public function cancelOrder(Request $request, Order $order)
+    {
+        abort_if($order->user_id != Auth::id(), 403,'You are not authorized to cancel this order.');
+
+        abort_if($order->status->is(OrderStatusEnum::CANCELLED), 403,'Order already cancelled.');
+
+        if(!$order->status->is(OrderStatusEnum::PENDING)){
+            return $this->respond('Order cannot be cancelled after payment. Please Talk to admin', 'error');
+        }
+
+        $order->update(['status' => OrderStatusEnum::CANCELLED->value]);
+
+        event(new NotifyAdmin([
+            'message' => 'Order #' . $order->id . ' has been cancelled by ' . $order->user->name,
+            'action' => route('admin.orders.show', $order->id),
+        ]));
+
+        return $this->respond('Order cancelled successfully.', 'success');
     }
 }

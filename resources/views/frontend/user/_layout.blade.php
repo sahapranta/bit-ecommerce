@@ -1,7 +1,7 @@
 @extends('layouts.simple')
 
 @section('content')
-<x-hero image="media/photos/photo10@2x.jpg" />
+<x-hero image="media/photos/bg-5.jpg" />
 
 <!-- Page Content -->
 <div class="content content-boxed">
