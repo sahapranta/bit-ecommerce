@@ -45,7 +45,7 @@
         </div>
         {{ $supports->links() }}
         @endif
-        <form action="{{ route('user.support') }}" method="post">
+        <form action="{{ route('user.support.save') }}" method="post">
             @csrf
             <div class="mb-4">
                 <label for="issue" class="form-label">Issue <span class="text-danger">*</span></label>

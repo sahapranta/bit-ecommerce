@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/profile/password', 'updatePassword')->name('profile.password');
         Route::get('/addresses', 'addresses')->name('addresses');
         Route::get('/support', 'support')->name('support');
-        Route::post('/support', 'supportSave')->name('support');
+        Route::post('/support', 'supportSave')->name('support.save');
         Route::get('/notifications', 'notifications')->name('notifications');
         Route::get('/track-order', 'trackOrder')->name('order.track');
         Route::post('/order-cancel/{order:order_id}')->name('order.cancel');
@@ -48,10 +48,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/image-upload', [UploadController::class, 'upload'])->name('image.upload');
 });
 
-Route::get('/test-email', function () {
-    $order = App\Models\Order::with(['items', 'items.product'])->latest()->first();
-    return new App\Mail\OrderSuccess($order);
-});
+// Route::get('/test-email', function () {
+//     $order = App\Models\Order::with(['items', 'items.product'])->latest()->first();
+//     return new App\Mail\OrderSuccess($order);
+// });
 
 Route::impersonate();
 
