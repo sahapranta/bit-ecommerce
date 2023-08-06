@@ -65,6 +65,20 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $customer->id,
+            'btc_address' => 'nullable|string|max:255',
+        ]);
+
+        $customer->update(
+            $request->only(
+                'name',
+                'email',
+                'btc_address',
+            )
+        );
+
         return redirect()->route('admin.customers.index')
             ->with('success', 'Customer updated successfully.');
     }

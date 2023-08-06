@@ -28,6 +28,7 @@ class User extends Authenticatable
         'is_admin',
         'status',
         'btc_address',
+        'profile_picture'
     ];
 
     /**

@@ -137,10 +137,10 @@
                             </div>
                             <form class="d-flex justify-content-between my-3 border-top border-bottom" action="" method="post" onsubmit="return false;">
                                 <div class="py-3">
-                                    <button type="submit" class="btn btn-sm btn-alt-secondary" onclick="Livewire.emit('addToCart', '{{ $product->slug }}')">
+                                    <button type="submit" class="btn btn-alt-secondary" onclick="Livewire.emit('addToCart', '{{ $product->slug }}')">
                                         <i class="fas fa-plus text-success me-1"></i> Add to Cart
                                     </button>
-                                    <button type="submit" class="btn btn-sm btn-alt-secondary ms-2" onclick="buyNow('{{ $product->slug }}')">
+                                    <button type="submit" class="btn btn-alt-secondary ms-2" onclick="buyNow('{{ $product->slug }}')">
                                         <i class="fas fa-shopping-cart text-danger me-1"></i> Buy Now
                                     </button>
                                 </div>

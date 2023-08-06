@@ -108,7 +108,7 @@
             <div class="row">
 
               <div class="col-md-6">
-                <x-input name="price" :value="$product->price" label="Price in {{ AppSettings::get('currency_code', 'GBP') }} ({{ AppSettings::get('currency_sign', '₿')}})" placeholder="Price..." type="number" step="any" min="0" required />
+                <x-input name="price" :value="$product->price" label="Price in {{ AppSettings::get('currency_code', 'GBP') }} ({{ AppSettings::get('currency_symbol', '£')}})" placeholder="Price..." type="number" step="any" min="0" required />
               </div>
 
               <div class="col-md-6">

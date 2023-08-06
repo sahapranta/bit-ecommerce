@@ -29,7 +29,8 @@ class AdminMenuComposer
             'Content',
             $this->makeLinks('Pages', 'layers',  $defaultChildren),
             // $this->makeLinks('Subscriber', 'people',  $defaultChildren),
-            ['name'=>'Notification', 'route'=>'admin.notifications.index', 'icon'=>'si si-bell', 'active'=>'admin/notifications*'],
+            ['name' => 'Support Ticket', 'route' => 'admin.support.index', 'icon' => 'si si-support', 'active' => 'admin/support*'],
+            ['name' => 'Notification', 'route' => 'admin.notifications.index', 'icon' => 'si si-bell', 'active' => 'admin/notifications*'],
             $this->makeLinks('Settings', 'settings'),
         ];
 

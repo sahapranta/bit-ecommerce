@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <label for="avatar" class="form-label">Choose a new avatar</label>
-                                        <input class="form-control" name="avatar @error('avatar') is-invalid @enderror" type="file" id="avatar">
+                                        <input class="form-control @error('avatar') is-invalid @enderror" name="avatar" type="file" id="avatar">
                                         @error('avatar')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @else

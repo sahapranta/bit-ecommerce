@@ -48,9 +48,9 @@ class SettingController extends Controller
             $requests['logo'] = $filename;
         }
 
-        if ($request->site_name != config('app.name')) {
-            $this->updateConfig('app.name', $request->site_name);
-        }
+        // if ($request->site_name != config('app.name')) {
+        //     $this->updateConfig('app.name', $request->site_name);
+        // }
 
         foreach ($requests as $key => $value) {
             $this->updateSettings($key, $value);

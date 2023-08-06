@@ -26,4 +26,9 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->group(function (
 
     Route::get('/settings', 'SettingController@index')->name('settings.index');
     Route::post('/settings/{action}', 'SettingController@action')->name('settings.action');
+
+    Route::get('/support', 'SupportController@index')->name('support.index');
+    Route::get('/support/{support}', 'SupportController@edit')->name('support.edit');
+    Route::post('/support/{support}', 'SupportController@update')->name('support.update');
+    Route::delete('/support/{support}', 'SupportController@destroy')->name('support.destroy');
 });

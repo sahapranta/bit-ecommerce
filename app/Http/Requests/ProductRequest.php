@@ -34,7 +34,7 @@ class ProductRequest extends FormRequest
             'tags' => 'nullable|array',
             'category_id' => 'required|exists:categories,id',
             'images' => 'nullable|array',
-            'discount' => 'nullable|numeric',
+            'discount' => 'nullable|numeric|lte:price',
             'upc' => 'nullable|string|max:13',
             'delivery_fee' => 'nullable|numeric',
             'options' => 'nullable|array',

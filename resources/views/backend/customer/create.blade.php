@@ -22,6 +22,7 @@
                         Back to List
                     </a>
 
+                    <hr>
 
                 </div>
             </div>

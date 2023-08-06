@@ -7,7 +7,7 @@ enum ProductStatusEnum: string
 {
     use \App\Traits\EnumHelper;
 
-    case DRAFT = 'draft';
     case PUBLISHED = 'published';
+    case DRAFT = 'draft';
     case ARCHIVED = 'archived';
 }

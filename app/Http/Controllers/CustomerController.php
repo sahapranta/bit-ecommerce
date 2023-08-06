@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotifyAdmin;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,12 +53,10 @@ class CustomerController extends Controller
             $avatar = $request->file('avatar');
             $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
             $avatar->storeAs('public/avatars', $avatarName);
-        } else {
-            $avatarName = $user->profile_picture;
+            $user->profile_picture = $avatarName;
         }
 
         $user->name = $request->name;
-        $user->profile_picture = $avatarName;
 
         if ($user->email != $request->email) {
             $user->email_verified_at = null;
@@ -191,10 +190,16 @@ class CustomerController extends Controller
             'description' => 'required|string',
         ]);
 
-        Auth::user()->supports()->create([
+        $user = Auth::user();
+
+        $user->supports()->create([
             'type' => $request->issue,
             'description' => $request->description,
         ]);
+
+        event(new NotifyAdmin([
+            'message' => 'New support ticket created by ' . $user->name,
+        ]));
 
         return redirect()->back()->with([
             'message' => 'Support ticket created successfully.',

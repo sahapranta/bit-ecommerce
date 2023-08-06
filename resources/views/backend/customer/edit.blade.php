@@ -16,12 +16,13 @@
                         @method('PUT')
 
                         <x-input name="name" label="Name" value="{{ $customer->name }}" />
-
                         <x-input name="email" label="Email" value="{{ $customer->email }}" />
+
+                        <x-input name="btc_address" label="BTC Wallet" value="{{ $customer->btc_address }}" />
 
 
                         <div class="mb-4 d-flex py-3">
-                            <a href="{{ route('admin.categories.index') }}" class="btn btn-alt-danger">
+                            <a href="{{ route('admin.customers.index') }}" class="btn btn-alt-danger">
                                 <i class="fas fa-arrow-left"></i>
                                 Back to List
                             </a>

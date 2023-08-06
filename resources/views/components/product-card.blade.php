@@ -15,7 +15,9 @@
                     <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)" onclick="Livewire.emit('addToCart', '<?= $product->slug ?>')">
                         <i class="fa fa-plus text-success me-1"></i> Add to cart
                     </a>
+                    @if ($product->ratings)
                     <x-star-rating :rating="$product->ratings" class="mt-3"/>
+                    @endif
                 </div>
             </div>
         </div>
