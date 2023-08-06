@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('bitcoin:checkpayment')->everyFiveMinutes();
+        $schedule->command('bitcoin:checkpayment')->everyThirtyMinutes();
         $schedule->command('prune:temp-uploads')->everyDay();
     }
 
