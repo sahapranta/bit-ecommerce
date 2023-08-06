@@ -13,12 +13,12 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->group(function (
     Route::get('/stock', 'ProductController@stock')->name('products.stock');
     Route::post('/stock', 'ProductController@stockUpdate')->name('products.stock.update');
     Route::get('/products/search', 'ProductController@search')->name('products.search');
-    Route::resource('products', 'ProductController')->except(['show']);
-    Route::resource('customers', 'CustomerController')->except(['store']);
+    Route::resource('products', 'ProductController');
+    Route::resource('customers', 'CustomerController');
     Route::get('/orders/{order}/invoice', 'OrderController@invoice')->name('orders.invoice');
     Route::get('/orders/{order}/sendmail', 'OrderController@sendmail')->name('orders.mail');
     Route::resource('orders', 'OrderController');
-    Route::resource('categories', 'CategoryController')->except(['show']);
+    Route::resource('categories', 'CategoryController');
     // Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/pages/upload', 'PageController@upload')->name('pages.upload');
     Route::resource('pages', 'PageController');
