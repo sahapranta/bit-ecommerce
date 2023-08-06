@@ -1,4 +1,4 @@
-@props(['image' => 'media/photos/photo3@2x.jpg', 'imageClass' => 'bg-image', 'containerClass'=> 'bg-primary-dark-op' ])
+@props(['image' => 'media/photos/bg-2.jpg', 'imageClass' => 'bg-image', 'containerClass'=> 'bg-primary-dark-op' ])
 <!-- Hero -->
 <div class="{{ $imageClass }}" style="<?= $image ? "background-image: url('" . asset($image) . "')" : ''; ?>">
     <div class="{{ $containerClass }}">

@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero -->
-<div class="bg-image" style="background-image: url('../media/photos/photo10@2x.jpg');">
+<div class="bg-image" style="background-image: url('../media/photos/bg-1.jpg');">
     <div class="bg-primary-dark-op">
         <div class="content content-full text-center py-6">
             <h1 class="h2 text-white mb-2">Welcome to our Digital Store!</h1>
@@ -40,7 +40,7 @@
                                 <div class="mb-4">
                                     <label class="form-label">Your Avatar</label>
                                     <div class="mb-4">
-                                        <img class="img-avatar" src="{{ asset($user->profile_picture ? 'storage/avatars/' . $user->profile_picture : 'media/avatars/avatar13.jpg') }}" alt="User Avatar">
+                                        <img class="img-avatar" src="{{ $user->avatar }}" alt="User Avatar">
                                     </div>
                                     <div class="mb-4">
                                         <label for="avatar" class="form-label">Choose a new avatar</label>
