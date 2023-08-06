@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('bitcoin:checkpayment')->everyThirtyMinutes();
-        $schedule->command('prune:temp-uploads')->everyDay();
+        $schedule->command('prune:temp-uploads')->weekly();
     }
 
     /**
