@@ -28,7 +28,7 @@
         <div class="d-flex gap-2 align-items-center justify-content-center">
             <h3 class="fw-bold text-center my-2 text-warning">{{ AppHelper::moneyWithSymbol($product->discounted_price) }}</h3>
             @if (ceil($product->discount) > 0)
-            <div>(<s>{{AppHelper::moneyWithSymbol($product->discounted_price)}}</s>)</div>
+            <div>(<s>{{AppHelper::moneyWithSymbol($product->price)}}</s>)</div>
             @endif
         </div>
         <div class="text-center">
