@@ -10,7 +10,7 @@
     <div class="block-content block-content-full space-y-3">
         @foreach ($shippingMethods as $key=> $method)
         <div class="form-check form-block" wire:key="{{ $key }}_delivery">
-            <input type="radio" onchange="Livewire.emit('addShipping', '<?= $method['key'] ?>')" value="standard" class="form-check-input" id="checkout-delivery-{{$key}}" name="delivery" {{ $loop->first ? 'checked': ''}}>
+            <input type="radio" onchange="Livewire.emit('addShipping', '<?= $method['key'] ?>')" value="{{ $method['name'] }}" class="form-check-input" id="checkout-delivery-{{$key}}" name="delivery" {{ $loop->first ? 'checked': ''}}>
             <label class="form-check-label" for="checkout-delivery-{{$key}}">
                 <span class="d-block fw-normal p-1">
                     <span class="d-block fw-semibold mb-1">{{ $method['name'] }}</span>
