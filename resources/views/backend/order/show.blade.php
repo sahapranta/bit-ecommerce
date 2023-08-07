@@ -128,7 +128,7 @@
                     <tr class="fw-bold border-0">
                         <td class="border-0" colspan="2"></td>
                         <td class="bg-light border-top">{{ __('Total in BTC') }}</td>
-                        <td class="text-end border-top bg-light">{{ AppHelper::moneyWithSymbol($order->btc_total, '₿') }}</td>
+                        <td class="text-end border-top bg-light">{{ AppHelper::withBtcSymbol($order->btc_total) }}</td>
                     </tr>
                 </table>
                 <p><b>Note</b>: {{ $order->delivery_note }}</p>

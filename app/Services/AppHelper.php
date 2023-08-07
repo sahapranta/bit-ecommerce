@@ -170,7 +170,12 @@ class AppHelper
         $amount = (string) $amount;
         $rate = static::getBTCRateInverse();
         $amount = bcmul($amount, $rate, static::BTC_DECIMAL);
+        return $symbol ? static::withBtcSymbol($amount) : static::withBtcSymbol($amount, null);
+    }
+
+    public static function withBtcSymbol($amount, $symbol = '₿'): string
+    {
         $amount = rtrim(rtrim($amount, '0'), '.');
-        return $symbol ? "₿ $amount" : $amount;
+        return $symbol ? "$symbol $amount" : $amount;
     }
 }

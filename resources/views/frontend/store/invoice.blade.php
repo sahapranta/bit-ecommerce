@@ -102,7 +102,7 @@ $bitcoin_img = '<img src="'.public_path('media/bitcoin-sm.png') . '" alt="&#8383
         </tr>
         <tr class="total">
             <td></td>
-            <td><span class="float-left">{{ __('Total in BTC') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::moneyWithSymbol($order->btc_total) }}</td>
+            <td><span class="float-left">{{ __('Total in BTC') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::withBtcSymbol($order->btc_total) }}</td>
         </tr>
     </table>
     <p><b>Note</b>: {{ $order->delivery_note }}</p>
