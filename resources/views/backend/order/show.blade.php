@@ -49,8 +49,8 @@
                                     @if(AppSettings::get('invoice_logo'))
                                     <img src="{{ asset(AppSettings::get('invoice_logo', 'media/invoice-logo.png')) }}" style="width: 100%; max-width: 300px" />
                                     @else
-                                    <h2 class="h3 mb-0">{{ config('app.name') }}</h2>
-                                    <small class="text-muted">{{ __('79 Swamibag, Dhaka, Bangladesh')  }}</small>
+                                    <h2 class="h3 mb-0">{{ AppSettings::get('site_name') }}</h2>
+                                    <small class="text-muted">{!! AppSettings::get('address') !!}</small>
                                     @endif
                                 </div>
 
@@ -94,7 +94,7 @@
                         <td>{{ $loop->index + 1 }}.</td>
                         <td width="60%">{{ $item->product->name }}</td>
                         <td class="text-center">{{ $item->quantity }} x {{ AppHelper::money($item->product->price) }}</td>
-                        <td class="text-end">{{ AppHelper::calculate($item->product->price, $item->quantity) }}</td>
+                        <td class="text-end">{{ AppHelper::calculate($item->product->price, $item->quantity, symbol:false) }}</td>
                     </tr>
                     @endforeach
 
@@ -124,6 +124,11 @@
                         <td class="border-0" colspan="2"></td>
                         <td class="bg-light border-top">{{ __('Total') }}</td>
                         <td class="text-end border-top bg-light">{{ AppHelper::moneyWithSymbol($order->total) }}</td>
+                    </tr>
+                    <tr class="fw-bold border-0">
+                        <td class="border-0" colspan="2"></td>
+                        <td class="bg-light border-top">{{ __('Total in BTC') }}</td>
+                        <td class="text-end border-top bg-light">{{ AppHelper::moneyWithSymbol($order->btc_total, '₿') }}</td>
                     </tr>
                 </table>
                 <p><b>Note</b>: {{ $order->delivery_note }}</p>

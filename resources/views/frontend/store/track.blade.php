@@ -53,11 +53,11 @@
 
                     <div class="d-md-flex justify-content-between align-items-center mb-5">
                         <div>
-                            <h5 class="mb-2 mb-md-0 font-weight-bold">#{{$order->tracking_id}}</h5>
+                            <h5 class="mb-2 mb-md-0 font-weight-bold">#{{ $order->order_id }}</h5>
                         </div>
                         <div class="text-md-end text-muted">
                             <p class="mb-0">Expected Arrival: <span>{{ $order->delivery_date?->format('F - d - Y') ?? 'TBA'}}</span></p>
-                            <p class="mb-0">USPS: <span class="font-weight-bold">234094567242423422898</span></p>
+                            <p class="mb-0">USPS: <span class="font-weight-bold">{{ $order->tracking_id }}</span></p>
                         </div>
                     </div>
 

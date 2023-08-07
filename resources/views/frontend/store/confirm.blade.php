@@ -53,7 +53,7 @@
                                     </tr>
                                     <tr>
                                         <td class="ps-4">{{ __('Order Total:') }}</td>
-                                        <td class="ps-2 fw-bold">{{ AppHelper::moneyWithSymbol($order->total) }}</td>
+                                        <td class="ps-2 fw-bold">{{ AppHelper::moneyWithSymbol($order->btc_total, '₿') }} ({{ AppHelper::moneyWithSymbol($order->total) }})</td>
                                     </tr>
                                     <tr>
                                         <td class="ps-4">{{ __('Delivery Method:') }}</td>
@@ -137,6 +137,10 @@
                             <tr>
                                 <td class="ps-0 fw-medium">{{ __('Total') }}</td>
                                 <td class="pe-0 fw-bold text-end">{{ AppHelper::moneyWithSymbol($order->total) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-0 fw-medium">{{ __('Total in BTC') }}</td>
+                                <td class="pe-0 fw-bold text-end">{{ AppHelper::moneyWithSymbol($order->btc_total, '₿') }}</td>
                             </tr>
                         </tbody>
                     </table>

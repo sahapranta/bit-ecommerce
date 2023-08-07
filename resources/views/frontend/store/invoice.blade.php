@@ -14,8 +14,8 @@ $bitcoin_img = '<img src="'.public_path('media/bitcoin-sm.png') . '" alt="&#8383
                             @if (AppSettings::get('invoice_logo', false))
                             <img src="{{ public_path(AppSettings::get('invoice_logo', 'media/invoice-logo.png')) }}" style="width: 100%; max-width: 300px" alt="LOGO" onerror="this.onerror=null;this.src='<?= asset(AppSettings::get('invoice_logo', 'media/invoice-logo.png')) ?>'"/>
                             @else
-                            <h5 class="h3 my-0">{{ config('app.name') }}</h5>
-                            <small class="text-muted" style="line-height: normal;">{{ __('79 Swamibag, Dhaka, Bangladesh')  }}</small>
+                            <h5 class="h3 my-0">{{ AppSettings::get('site_name') }}</h5>
+                            <small class="text-muted" style="line-height: normal;">{!! AppSettings::get('address')  !!}</small>
                             @endif
                         </td>
 
@@ -77,29 +77,32 @@ $bitcoin_img = '<img src="'.public_path('media/bitcoin-sm.png') . '" alt="&#8383
         <tr class="total">
             <td></td>
 
-            <td><span class="float-left">{{ __('Subtotal') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::money($order->subtotal) }}</td>
+            <td><span class="float-left">{{ __('Subtotal') }}: </span> {{ AppHelper::moneyWithSymbol($order->subtotal) }}</td>
         </tr>
         @settings('tax_enabled')
         <tr class="total">
             <td></td>
 
-            <td><span class="float-left">{{ __('Tax') }} ({{ AppSettings::get('tax_rate', 0) }}%): </span> {!! $bitcoin_img !!} {{ AppHelper::money($order->tax) }}</td>
+            <td><span class="float-left">{{ __('Tax') }} ({{ AppSettings::get('tax_rate', 0) }}%): </span> {{ moneyWithSymbol::money($order->tax) }}</td>
         </tr>
         @endsettings
         <tr class="total">
             <td></td>
 
-            <td><span class="float-left">{{ __('Discount') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::money($order->discount) }}</td>
+            <td><span class="float-left">{{ __('Discount') }}: </span> {{ AppHelper::moneyWithSymbol($order->discount) }}</td>
         </tr>
         <tr class="total">
             <td></td>
 
-            <td><span class="float-left">{{ __('Shipping Fee') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::money($order->shipping) }}</td>
+            <td><span class="float-left">{{ __('Shipping Fee') }}: </span> {{ AppHelper::moneyWithSymbol($order->shipping) }}</td>
         </tr>
         <tr class="total">
             <td></td>
-
-            <td><span class="float-left">{{ __('Total') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::money($order->total) }}</td>
+            <td><span class="float-left">{{ __('Total') }}: </span> {{ AppHelper::moneyWithSymbol($order->total) }}</td>
+        </tr>
+        <tr class="total">
+            <td></td>
+            <td><span class="float-left">{{ __('Total in BTC') }}: </span> {!! $bitcoin_img !!} {{ AppHelper::moneyWithSymbol($order->btc_total) }}</td>
         </tr>
     </table>
     <p><b>Note</b>: {{ $order->delivery_note }}</p>
