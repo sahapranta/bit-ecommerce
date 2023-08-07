@@ -120,7 +120,7 @@ class StoreController extends Controller
                 'discount' => $discount,
                 'tax' => $tax,
                 'total' => $total,
-                'btc_total' => \AppHelper::convertToBTC($total),
+                'btc_total' => \AppHelper::convertToBTC($total, false),
                 'address' => $addressToSave,
             ]);
 
