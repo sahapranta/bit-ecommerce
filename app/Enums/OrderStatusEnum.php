@@ -22,7 +22,7 @@ enum OrderStatusEnum: string
     // case FAILED = 'failed';
     // case SUSPENDED = 'suspended';
 
-    public static function getCssColor(string | self $value = null): string
+    public static function getCssColor(self $value = null): string
     {
         return match ($value) {
             self::INCOMPLETE, self::PENDING, self::PROCESSING => 'info',
@@ -30,5 +30,10 @@ enum OrderStatusEnum: string
             self::RETURNED, self::CANCELLED, self::REFUNDED => 'danger',
             default => 'secondary',
         };
+    }
+
+    public function getColor(): string
+    {
+        return static::getCssColor($this);
     }
 }

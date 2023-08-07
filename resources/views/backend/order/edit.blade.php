@@ -30,8 +30,8 @@
                             <label class="form-label" for="status">ORDER STATUS</label>
                             <select name="status" class="form-select bg-light">
                                 <option value="">STATUS</option>
-                                @foreach(\App\Enums\OrderStatusEnum::options() as $key=>$status)
-                                <option value="{{ $key }}" <?= $order->status->value == $status ? 'selected' : '' ?>>{{ strtoupper($status) }}</option>
+                                @foreach(\App\Enums\OrderStatusEnum::options() as $key => $status)
+                                <option value="{{ $status }}" <?= $order->status->value == $status ? 'selected' : '' ?>>{{ $key }}</option>
                                 @endforeach
                             </select>
 
@@ -46,20 +46,13 @@
 
                     <div class="col-md-4 mb-3">
                         @php
-                        $methods = [
-                        'express' => 'Express',
-                        'standard' => 'Standard',
-                        'free' => 'Free',
-                        'local_pickup' => 'Local Pickup',
-                        'flat_rate' => 'Flat Rate',
-                        'home_delivery' => 'Home Delivery'
-                        ];
+                        $methods = AppSettings::get('delivery_methods', ['self_pickup', 'home_delivery']);
                         @endphp
                         <label class="form-label" for="delivery_method">DELIVERY METHOD</label>
                         <select name="delivery_method" class="form-select bg-light">
                             <option value="">DELIVERY METHOD</option>
-                            @foreach($methods as $key=> $method)
-                            <option value="{{ $key }}" <?= old('delivery_method', $order->delivery_method) == $method ? 'selected' : '' ?>>{{ strtoupper($method) }}</option>
+                            @foreach($methods as $method => $value)
+                            <option value="{{ $method }}" <?= old('delivery_method', $order->delivery_method) == $method ? 'selected' : '' ?>>{{ strtoupper($method) }}</option>
                             @endforeach
                         </select>
                     </div>

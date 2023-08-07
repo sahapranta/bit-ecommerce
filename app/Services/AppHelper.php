@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class AppHelper
 {
@@ -16,7 +18,7 @@ class AppHelper
             return '-' . static::money($amount);
         };
 
-        $amount = MoneyService::convertToNumber($amount);
+        // $amount = MoneyService::convertToNumber($amount);
 
         $rate  = static::getCurrencyRate() ?? 1;
         $amount = bcmul($amount, $rate, 9);
@@ -137,5 +139,30 @@ class AppHelper
         }
 
         return $template;
+    }
+
+    public static function getBTCRate(bool $fresh = false)
+    {
+        if ($fresh) {
+            Cache::forget('btc_rate');
+        }
+
+        $rate = Cache::remember('btc_rate', 60 * 60 * 6, function () {
+            // get the btc_rate.json file from the storage
+            $file = Storage::json('btc-rate.json');
+            if (empty($file)) return 1;
+            $rate = $file['rate'];
+            return bcdiv(1, $rate, 9);
+        });
+
+        return $rate;
+    }
+
+    public static function convertToBTC($amount, bool $symbol = true): string|float
+    {
+        $amount = (string) $amount;
+        $rate = static::getBTCRate();
+        $amount = bcmul($amount, $rate, 9);
+        return $symbol ? static::moneyWithSymbol($amount, '₿') : static::money($amount);
     }
 }

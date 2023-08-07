@@ -32,15 +32,7 @@
                         <td>{{ $order->created_at->format('d-m-Y') }}</td>
                         <td>{{ $order->items->count() }}</td>
                         <td>
-                            @if($order->status->is('pending'))
-                            <span class="badge bg-warning">Pending</span>
-                            @elseif($order->status->is('processing'))
-                            <span class="badge bg-info">Processing</span>
-                            @elseif($order->status->is('delivered'))
-                            <span class="badge bg-success">Delivered</span>
-                            @elseif($order->status->is('returned'))
-                            <span class="badge bg-danger">Returned</span>
-                            @endif
+                            <span class="badge text-capitalize bg-{{ $order->status->getColor() }}">{{$order->status->value}}</span>
                         </td>
                         <td>{{ AppHelper::moneyWithSymbol($order->total) }}</td>
                         <td>

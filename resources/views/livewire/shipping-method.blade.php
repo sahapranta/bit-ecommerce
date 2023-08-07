@@ -14,7 +14,7 @@
             <label class="form-check-label" for="checkout-delivery-{{$key}}">
                 <span class="d-block fw-normal p-1">
                     <span class="d-block fw-semibold mb-1">{{ $method['name'] }}</span>
-                    <span class="d-block fs-sm fw-medium text-muted"><span class="fw-semibold">{{ $method['fee']>0 ? '+' . AppHelper::money($method['fee']) : 'FREE' }}</span> {{ $method['description'] }}</span>
+                    <span class="d-block fs-sm fw-medium text-muted"><span class="fw-semibold">{{ $method['fee']>0 ? '+' . AppHelper::moneyWithSymbol($method['fee']) : 'FREE' }}</span> {{ $method['description'] }}</span>
                 </span>
             </label>
         </div>

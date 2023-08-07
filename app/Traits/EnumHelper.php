@@ -72,4 +72,10 @@ trait EnumHelper
     {
         return in_array($this->value, $value);
     }
+
+    /** Get Comma Separated values */
+    public static function commaSeparated(): string
+    {
+        return implode(',', static::values());
+    }
 }

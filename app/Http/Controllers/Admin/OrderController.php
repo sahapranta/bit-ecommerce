@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
@@ -110,10 +111,10 @@ class OrderController extends Controller
         // $emailJob = (new SendEmail($details, $order))->delay(now()->addMinutes(1));
         // dispatch($emailJob);
         // Mail::to($details)
-            // ->cc($moreUsers)
-            // ->bcc($evenMoreUsers)
-            // ->queue(new OrderSuccessMail($order));
-            // ->later(now()->addMinutes(1), new OrderSuccessMail($order));
+        // ->cc($moreUsers)
+        // ->bcc($evenMoreUsers)
+        // ->queue(new OrderSuccessMail($order));
+        // ->later(now()->addMinutes(1), new OrderSuccessMail($order));
         Notification::send($order->user, new OrderSuccess($order));
         return $this->respond('Email sent successfully');
     }
@@ -127,7 +128,31 @@ class OrderController extends Controller
 
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'status' => 'required|in:' . OrderStatusEnum::commaSeparated(),
+            'is_gift' => 'nullable|boolean',
+            'delivery_date' => 'nullable|date',
+            'delivery_note' => 'nullable|string|max:255',
+            'delivery_method' => 'nullable|string|max:255',
+            'delivery_status' => 'nullable|string|max:255',
+            'gift_message' => 'nullable|string|max:255',
+        ]);
+
+        $request->merge([
+            'is_gift' => in_array($request->is_gift, ['on', '1', true, 1]) ? true : false,
+        ]);
+
+        $order->update($request->only(
+            'status',
+            'delivery_date',
+            'delivery_note',
+            'is_gift',
+            'gift_message',
+            'delivery_method',
+            'delivery_status',
+        ));
+
+        return $this->respond('Order updated successfully');
     }
 
     public function destroy(Order $order)
