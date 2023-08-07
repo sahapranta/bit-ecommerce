@@ -23,7 +23,7 @@ class PaymentService
             'user_id' => User::find(2)->id,
             'order_id' => $order->id,
             'address' => $this->getCurrentUserAddress(),
-            'amount' => $order->total,
+            'amount' => $order->btc_total,
         ]);
 
         // return $payment;
@@ -68,12 +68,12 @@ class PaymentService
 
     public function buildParams($payment)
     {
-        $label =  Str::studly(auth()->user()->name) . '-' . $payment->id . '-' . $payment->order_id;
+        $label = $payment->order_id;
 
         return Cache::remember($label, 60 * 60 * 24, function () use ($label, $payment) {
             return [
                 'label' => $label,
-                'message' => 'Order of ' . $payment->order->items->count() . ' items',
+                'message' => 'Order of ' . $payment->order->items->count() . ' items total ' . $payment->order->total . ' ' . \AppSettings::get('currency_code', 'GBP'),
                 'r' => route('payments.callback', $payment->id),
             ];
         });

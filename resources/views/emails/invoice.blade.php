@@ -27,13 +27,14 @@ ___
 |#| Product       | Qty x Price   | Subtotal |
 |-|:------------ |:-------------:| --------:|
 @foreach ($order->items as $item)
-| {{$loop->iteration }}.| {{ $item->product->name }} | {{ $item->quantity }} x {{ AppHelper::money($item->price) }} | {{ AppHelper::money($item->price * $item->quantity) }} |
+| {{$loop->iteration }}.| {{ $item->product->name }} | {{ $item->quantity }} x {{ AppHelper::money($item->price) }} | {{ AppHelper::calculate($item->price, $item->quantity) }} |
 @endforeach
-| |              |   Subtotal:|{{ AppHelper::moneyWithSymbol($order->subtotal) }} |
-| |             |  Discount: |{{ AppHelper::moneyWithSymbol($order->discount) }} |
-| |              |       Tax: |{{ AppHelper::moneyWithSymbol($order->tax) }} |
-| |              |  Shipping: |{{ AppHelper::moneyWithSymbol($order->shipping) }} |
-| |             | **Total:** |**{{ AppHelper::moneyWithSymbol($order->total) }}** |
+| |              |   Subtotal:    |{{ AppHelper::moneyWithSymbol($order->subtotal) }} |
+| |              |  Discount:     |{{ AppHelper::moneyWithSymbol($order->discount) }} |
+| |              |       Tax:     |{{ AppHelper::moneyWithSymbol($order->tax) }}      |
+| |              |  Shipping:     |{{ AppHelper::moneyWithSymbol($order->shipping) }} |
+| |              | **Total:**     |**{{ AppHelper::moneyWithSymbol($order->total) }}**|
+| |              | **Total BTC:** |**{{ AppHelper::money($order->btc_total) }}**      |
 </x-mail::table>
 
 <center>Thank you for shopping with us.</center>

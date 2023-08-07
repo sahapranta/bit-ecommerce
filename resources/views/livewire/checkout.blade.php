@@ -40,28 +40,34 @@
             </tbody>
             <tbody>
                 <tr>
-                    <td class="ps-0 fw-medium">Subtotal</td>
+                    <td class="ps-0 fw-medium">{{ __('Subtotal') }}</td>
                     <td class="pe-0 fw-medium text-end">{{ AppHelper::moneyWithSymbol($subtotal) }}</td>
                 </tr>
                 @settings('tax_enabled')
                 <tr>
-                    <td class="ps-0 fw-medium">Vat ({{ AppSettings::get('tax_rate', 0) }}%)</td>
+                    <td class="ps-0 fw-medium">{{ __('Tax') }} ({{ AppSettings::get('tax_rate', 0) }}%)</td>
                     <td class="pe-0 fw-medium text-end">{{ AppHelper::moneyWithSymbol($tax) }}</td>
                 </tr>
                 @endsettings
                 <tr>
-                    <td class="ps-0 fw-medium">Discount</td>
+                    <td class="ps-0 fw-medium">{{ __('Discount') }}</td>
                     <td class="pe-0 fw-medium text-end">{{ AppHelper::moneyWithSymbol($discount) }}</td>
                 </tr>
                 <tr>
-                    <td class="ps-0 fw-medium">Shipping</td>
+                    <td class="ps-0 fw-medium">{{ __('Shipping') }}</td>
                     <td class="pe-0 fw-medium text-end">{{ AppHelper::moneyWithSymbol($shipping) }}</td>
                 </tr>
                 <tr>
-                    <td class="ps-0 fw-medium">Total</td>
+                    <td class="ps-0 fw-medium">{{ __('Total') }}</td>
                     <td class="pe-0 fw-bold text-end">{{ AppHelper::moneyWithSymbol($total) }}</td>
+                </tr>
+                <tr>
+                    <td class="ps-0 fw-medium">{{ __('TOTAL IN BTC') }}</td>
+                    <td class="pe-0 fw-bold text-end">{{ AppHelper::convertToBTC($total) }}</td>
                 </tr>
             </tbody>
         </table>
+        <small> <i class="fas fa-info-circle"></i> Total may vary depending on <b>BITCOIN CURRENT PRICE</b>.
+        <br> (1 BTC = {{ AppHelper::getBTCRate() }} GBP) </small>
     </div>
 </div>

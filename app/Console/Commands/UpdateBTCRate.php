@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
@@ -103,6 +104,9 @@ class UpdateBTCRate extends Command
             ->withHeaders([
                 'X-CoinAPI-Key' => env('COINAPI_KEY'),
             ])
+            ->throw(function ($response, $e) {
+                Log::info('Error: ' . $e->getMessage(), $response->json());
+            })
             ->get($url)
             ->json();
 

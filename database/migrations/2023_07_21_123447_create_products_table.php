@@ -21,12 +21,12 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('short_description')->nullable();
-            $table->decimal('price', 16, 8)->default(0);
-            $table->decimal('discount', 10, 8)->nullable();
-            $table->string('status')->default(\App\Enums\ProductStatusEnum::DRAFT?->value || 'draft');
+            $table->decimal('price', 10, 2)->default(0);
+            $table->decimal('discount', 10, 2)->nullable();
+            $table->string('status')->default('published')->index();
             $table->integer('stock')->default(0);
             $table->integer('sales')->default(0);
-            $table->decimal('delivery_fee', 10, 8)->default(0);
+            $table->decimal('delivery_fee', 10, 2)->nullable()->default(0);
             $table->json('tags')->nullable();
             $table->json('options')->nullable();
             $table->softDeletes();

@@ -131,20 +131,22 @@
                                     @endif
                                     <div class="fs-sm text-muted">{{ $product->stock }} Available</div>
                                 </div>
-                                <div class="fs-2 fw-bold">
-                                    {{ AppHelper::moneyWithSymbol($product->price) }}
-                                </div>
+                                <div class="fs-2 fw-bold">{{ AppHelper::moneyWithSymbol($product->discounted_price) }}</div>
                             </div>
-                            <form class="d-flex justify-content-between my-3 border-top border-bottom" action="" method="post" onsubmit="return false;">
-                                <div class="py-3">
-                                    <button type="submit" class="btn btn-alt-secondary" onclick="Livewire.emit('addToCart', '{{ $product->slug }}')">
-                                        <i class="fas fa-plus text-success me-1"></i> Add to Cart
-                                    </button>
-                                    <button type="submit" class="btn btn-alt-secondary ms-2" onclick="buyNow('{{ $product->slug }}')">
-                                        <i class="fas fa-shopping-cart text-danger me-1"></i> Buy Now
-                                    </button>
-                                </div>
-                            </form>
+                            <div class="text-muted fs-md mt-1">
+                                BTC PRICE: {{ AppHelper::convertToBTC($product->discounted_price) }}
+                                <br>
+                                (Rate: {{ AppHelper::getBTCRate() }})
+                            </div>
+                            <div class="d-flex justify-content-start my-3 py-3 border-top border-bottom">
+
+                                <button type="submit" class="btn btn-alt-secondary" onclick="Livewire.emit('addToCart', '{{ $product->slug }}')">
+                                    <i class="fas fa-plus text-success me-1"></i> Add to Cart
+                                </button>
+                                <button type="submit" class="btn btn-alt-secondary ms-2" onclick="buyNow('{{ $product->slug }}')">
+                                    <i class="fas fa-shopping-cart text-danger me-1"></i> Buy Now
+                                </button>
+                            </div>
                             <a href="{{ route('home.products.category', $product->category->slug) }}" class="text-muted text-uppercase">{{ $product->category->name }}</a>
                             <p class="mt-2">{{ $product->short_description  }}</p>
                             <!-- END Info -->

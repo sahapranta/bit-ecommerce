@@ -1,13 +1,7 @@
 @extends('layouts.simple')
 
 @section('content')
-<!-- Hero -->
 <x-hero>
-
-    <!-- <a href="{{ route('home') }}">
-                <i class="fa fa-2x fa-circle-notch text-light"></i>
-            </a> -->
-
     <h1 class="h2 text-white mb-2">
         <i class="fa fa-shopping-cart text-white-75 me-1"></i> {{ __('Checkout') }}
     </h1>
@@ -28,24 +22,9 @@
         @csrf
         <div class="row">
             <div class="col-xl-7">
-                <!-- Shipping Method -->
                 <livewire:shipping-method />
-                <!-- END Shipping Method -->
                 <livewire:user-address />
-                <!-- Payment -->
-                <!-- <div class="block block-rounded block-mode-hidden">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">
-                            3. Payment
-                        </h3>
-                        <div class="block-options">
-                            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="block-option" data-action="content_toggle"></button>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Payment -->
             </div>
-            <!-- Order Summary -->
             <div class="col-xl-5 order-xl-last">
                 <livewire:checkout />
                 <div class="mb-4">
@@ -67,10 +46,8 @@
                     {{ __('Complete Order') }}
                 </button>
             </div>
-            <!-- END Order Summary -->
         </div>
     </form>
-    <!-- END Checkout -->
 </div>
 @endsection
 

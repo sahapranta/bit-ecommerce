@@ -65,6 +65,9 @@ class StoreController extends Controller
 
         try {
 
+            $deliveryMethods = \AppSettings::get('delivery_methods', []);
+            $shipping = data_get($deliveryMethods, $request->get('delivery'), 0);
+
             $order = Order::create([
                 'user_id' => auth()->id(),
                 'order_id' => Str::uuid(),
@@ -75,12 +78,13 @@ class StoreController extends Controller
                 'delivery_note' => $request->delivery_note,
                 'status' => 'pending',
                 'total' => 0,
+                'btc_total' => 0,
                 'subtotal' => 0,
+                'shipping' => $shipping,
             ]);
 
             $subtotal = 0;
             $discount = 0;
-            $shipping = (float) $request->get('delivery', 0);
 
             foreach ($cart as $key => $value) {
                 $product = Product::findOrFail($key);
@@ -93,23 +97,18 @@ class StoreController extends Controller
                     'price' => $price,
                 ]);
 
-                $subtotal += bcmul($product->price, $value['quantity'], 8);
+                $subtotal += bcmul($product->price, $value['quantity'], 2);
                 $discount_value = (float) $product->discount;
-                $discount += bcmul($discount_value, $value['quantity'], 8);
+                $discount += bcmul($discount_value, $value['quantity'], 2);
 
                 $product->decrement('stock', $value['quantity']);
                 $product->increment('sales', $value['quantity']);
             }
 
             $tax_rate = AppSettings::get('tax_rate', 0);
-            $tax = $tax_rate ? bcmul($subtotal, ($tax_rate / 100), 8) : 0;
+            $tax = $tax_rate > 0 ? bcmul($subtotal, ($tax_rate / 100), 8) : 0;
 
-
-            $after_discount = bcsub($subtotal, $discount, 8);
-            $add_tax = bcadd($after_discount, $tax, 8);
-            $total = bcadd($add_tax, $shipping, 8);
-
-            // $total = $subtotal - $discount + $tax + $shipping;
+            $total = $subtotal - $discount + $tax + $shipping;
 
             $addressToSave = Address::where('id', $request->shipping_address_id)
                 ->select('name', 'phone', 'street_1', 'street_2', 'city', 'province', 'country', 'postal_code')
@@ -120,8 +119,8 @@ class StoreController extends Controller
                 'subtotal' => $subtotal,
                 'discount' => $discount,
                 'tax' => $tax,
-                'shipping' => $shipping,
                 'total' => $total,
+                'btc_total' => \AppHelper::convertToBTC($total),
                 'address' => $addressToSave,
             ]);
 

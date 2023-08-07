@@ -9,19 +9,24 @@ use Illuminate\Support\Facades\Storage;
 
 class AppHelper
 {
+    const DECIMAL = 2;
+    const BTC_DECIMAL = 9;
+    const BTC_SATOSHI = 100000000;
+    const BTC_REMEMBER = 60 * 60 * 4; // 4 hours
+
     public static function money($amount, bool $noFormat = false): string|float
     {
         if (!is_numeric($amount)) return 0;
 
         if ($amount < 0) {
-            $amount = bcmul($amount, -1, 9);
+            $amount = bcmul($amount, -1, static::DECIMAL);
             return '-' . static::money($amount);
         };
 
         // $amount = MoneyService::convertToNumber($amount);
 
         $rate  = static::getCurrencyRate() ?? 1;
-        $amount = bcmul($amount, $rate, 9);
+        $amount = bcmul($amount, $rate, static::DECIMAL);
 
         if ($noFormat) return $amount;
 
@@ -61,7 +66,7 @@ class AppHelper
         // $price = MoneyService::convertToNumber($price);
         // $quantity = MoneyService::convertToNumber($quantity);
 
-        $amount = bcmul($price, $quantity, 9);
+        $amount = bcmul($price, $quantity, static::DECIMAL);
         if ($symbol) return static::moneyWithSymbol($amount);
         return static::money($amount, $noFormat);
     }
@@ -147,22 +152,25 @@ class AppHelper
             Cache::forget('btc_rate');
         }
 
-        $rate = Cache::remember('btc_rate', 60 * 60 * 6, function () {
+        return Cache::remember('btc_rate', static::BTC_REMEMBER, function () {
             // get the btc_rate.json file from the storage
             $file = Storage::json('btc-rate.json');
             if (empty($file)) return 1;
-            $rate = $file['rate'];
-            return bcdiv(1, $rate, 9);
+            return data_get($file, 'rate', 1);
         });
+    }
 
-        return $rate;
+    public static function getBTCRateInverse()
+    {
+        return bcdiv(1, static::getBTCRate(), static::BTC_DECIMAL) ?? 1;
     }
 
     public static function convertToBTC($amount, bool $symbol = true): string|float
     {
         $amount = (string) $amount;
-        $rate = static::getBTCRate();
-        $amount = bcmul($amount, $rate, 9);
-        return $symbol ? static::moneyWithSymbol($amount, '₿') : static::money($amount);
+        $rate = static::getBTCRateInverse();
+        $amount = bcmul($amount, $rate, static::BTC_DECIMAL);
+        $amount = rtrim(rtrim($amount, '0'), '.');
+        return $symbol ? "₿ $amount" : $amount;
     }
 }

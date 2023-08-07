@@ -21,6 +21,7 @@ class Order extends Model
         'billing_address_id',
         'address',
         'total',
+        'btc_total',
         'subtotal',
         'tax',
         'discount',

@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('shipping_address_id')->nullOnDelete()->constrained('addresses');
             $table->foreignId('billing_address_id')->nullable()->constrained('addresses');
-            $table->decimal('total', 16, 8);
-            $table->decimal('subtotal', 16, 8);
-            $table->decimal('tax', 16, 8)->nullable();
-            $table->decimal('discount', 16, 8)->nullable();
-            $table->decimal('shipping', 16, 8)->nullable();
+            $table->decimal('total', 10, 2);
+            $table->decimal('subtotal', 10, 2);
+            $table->decimal('tax', 10, 2)->nullable();
+            $table->decimal('discount', 10, 2)->nullable();
+            $table->decimal('shipping', 10, 2)->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('delivery_method')->nullable();

@@ -22,14 +22,18 @@
             </div>
         </div>
     </div>
-    <div class="block-content">
-        <div class="mb-1">
-            <div class="fw-semibold float-end ms-1">
-                {{ AppHelper::moneyWithSymbol($product->discounted_price) }} <br>
-                <small class="text-muted">{{ AppHelper::convertToBTC($product->discounted_price) }}</small>
-            </div>
-            <a class="h6" href="{{ route('product.view', $product->slug) }}">{{ $product->name }}</a>
+    <div class="block-content pb-4">
+        <a class="h6" href="{{ route('product.view', $product->slug) }}">{{ $product->name }}</a>
+
+        <div class="d-flex gap-2 align-items-center justify-content-center">
+            <h3 class="fw-bold text-center my-2 text-warning">{{ AppHelper::moneyWithSymbol($product->discounted_price) }}</h3>
+            @if (ceil($product->discount) > 0)
+            <div>(<s>{{AppHelper::moneyWithSymbol($product->discounted_price)}}</s>)</div>
+            @endif
         </div>
-        <p class="fs-sm text-muted">{{ $product->title }}</p>
+        <div class="text-center">
+            <small class="fs-sm badge bg-light text-muted">BTC PRICE: {{ AppHelper::convertToBTC($product->discounted_price) }}</small>
+        </div>
+        <!-- <p class="fs-sm text-muted">{{ $product->title }}</p> -->
     </div>
 </div>
