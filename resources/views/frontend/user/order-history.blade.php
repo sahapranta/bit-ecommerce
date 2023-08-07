@@ -34,9 +34,12 @@
                         <td>
                             <span class="badge text-capitalize bg-{{ $order->status->getColor() }}">{{$order->status->value}}</span>
                         </td>
-                        <td>{{ AppHelper::moneyWithSymbol($order->total) }}</td>
+                        <td>{{ AppHelper::moneyWithSymbol($order->total) }} ({{ AppHelper::withBtcSymbol($order->btc_total) }})</td>
                         <td>
                             <a href="{{ route('order.track', ['order'=>$order->order_id]) }}" class="btn btn-sm btn-primary">Track</a>
+                            @if (!$order->is_paid)
+                            <a href="{{ route('checkout.confirm', $order->order_id) }}" class="btn bt-sm btn-warning ms-1" >Pay</a>
+                            @endif
                             @if($order->status->is('pending'))
                             <button onclick="cancelOrder()" data-action="{{ route('user.order.cancel', $order->order_id) }}" class="btn btn-sm btn-alt-danger ms-1">Cancel</button>
                             @elseif($order->is_paid)
