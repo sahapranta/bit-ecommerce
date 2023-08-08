@@ -22,6 +22,17 @@
 <div class="content">
     <div class="row">
         <div class="col-md-8 offset-md-2">
+            <table class="table table-striped table-sm mb-0">
+                <tr>
+                    <td class="ps-4 py-2">{{ __('Payment Link:') }}</td>
+                    <td class="ps-2 py-2 d-flex justify-content-between align-items-center">
+                        <strong>bitcoin:{{ $order->payment->address }}?amount={{$order->payment->amount}}</strong>
+                        <button class="btn btn-sm btn-alt-secondary py-0 copy-me" data-info="bitcoin:{{ $order->payment->address }}?amount={{$order->payment->amount}}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Copy') }}">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
             <div class="row">
                 <div class="col-md-9">
                     <div class="block block-rounded bg-light shadow">
