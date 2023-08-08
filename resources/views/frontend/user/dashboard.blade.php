@@ -124,7 +124,7 @@
                                     <a href="{{ route('order.track', ['order'=>$order->order_id]) }}" class="btn btn-sm btn-primary">Track</a>
                                     @endif
                                     @if($order->status->is('pending'))
-                                    <a href="{{ route('user.order.cancel', $order->order_id) }}" class="btn btn-sm btn-alt-danger ms-1">Cancel</a>
+                                    <button onclick="cancelOrder()" data-action="{{ route('user.order.cancel', $order->order_id) }}" class="btn btn-sm btn-alt-danger ms-1">Cancel</button>
                                     @elseif($order->is_paid)
                                     <a href="{{ route('checkout.invoice', $order->order_id) }}" class="btn btn-sm btn-alt-primary ms-1">Invoice</a>
                                     @endif
@@ -150,5 +150,38 @@
 @endsection
 
 @section('js')
+<script defer src="{{ asset('js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @include('frontend.partials._copy-me')
+<script>
+    function cancelOrder(event) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "{{ __('Yes, cancel it!') }}",
+            cancelButtonText: "{{ __('No, keep it') }}",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let action = event.target.dataset.action;
+                axios.post(action)
+                    .then(function(response) {
+                        Swal.fire(
+                            'Cancelled!',
+                            response.data.message,
+                            'success'
+                        ).then((result) => location.reload());
+                    })
+                    .catch(function(error) {
+                        Swal.fire(
+                            'Cancelled!',
+                            error.response.data.message,
+                            'error'
+                        );
+                    });
+            }
+        })
+    }
+</script>
 @endsection
