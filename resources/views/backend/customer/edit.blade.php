@@ -11,7 +11,7 @@
                     </h3>
                 </div>
                 <div class="block-content pb-3">
-                    <form action="{{ route('admin.customers.update', $customer->id) }}" method="post">
+                    <form action="{{ route('admin.customers.update', $customer->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 

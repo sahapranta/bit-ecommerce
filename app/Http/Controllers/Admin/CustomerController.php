@@ -47,7 +47,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show(User $customer)
     {
         //
     }
@@ -63,7 +63,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, User $customer)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -79,8 +79,7 @@ class CustomerController extends Controller
             )
         );
 
-        return redirect()->route('admin.customers.index')
-        ->with('success', 'Customer updated successfully.');
+        return $this->respond('Customer Updated Successfully');
     }
 
     /**
