@@ -29,7 +29,7 @@ class CheckPayment extends Command
     /**
      * Execute the console command.
      */
-    public function handle(BlockService $block): void
+    public function handle(BlockService $block)
     {
         if(config('blockio.api_key') == null || config('blockio.pin') == null) {
             $this->error('PLEASE SET BLOCKIO API KEY .ENV FILE');
